@@ -51,7 +51,7 @@ const Layout = () => {
 
   const customTitlebar = useMemo(
     () =>
-      decorated === false ? (
+      decorated === false && OS !== 'linux' ? (
         <div className="the_titlebar">
           <div
             className="the_titlebar-drag-region"

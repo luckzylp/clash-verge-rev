@@ -116,9 +116,22 @@ mod app_init {
     /// Setup window state management
     pub fn setup_window_state(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
         logging!(debug, Type::Setup, "初始化窗口状态管理...");
+        // Linux keeps the native title bar: don't save/restore `decorated` so a
+        // stale self-drawn state can't override the build-time default.
+        let state_flags = {
+            let flags = tauri_plugin_window_state::StateFlags::all();
+            #[cfg(target_os = "linux")]
+            {
+                flags & !tauri_plugin_window_state::StateFlags::DECORATIONS
+            }
+            #[cfg(not(target_os = "linux"))]
+            {
+                flags
+            }
+        };
         let window_state_plugin = tauri_plugin_window_state::Builder::new()
             .with_filename(files::WINDOW_STATE)
-            .with_state_flags(tauri_plugin_window_state::StateFlags::default())
+            .with_state_flags(state_flags)
             .build();
         app.handle().plugin(window_state_plugin)?;
         Ok(())
