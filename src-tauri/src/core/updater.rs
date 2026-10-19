@@ -228,7 +228,7 @@ pub enum DownloadEvent {
     Finished,
 }
 
-const MIRRORS: [&str; 2] = ["https://update.hwdns.net/", "https://gh-proxy.org/"];
+const MIRRORS: [&str; 1] = ["https://gh-proxy.org/"];
 /// A source delivering less than this per window is dropped for the next one.
 const MIN_PROGRESS: u64 = 1024 * 1024;
 const PROGRESS_WINDOW: Duration = Duration::from_secs(30);

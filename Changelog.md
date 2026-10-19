@@ -22,6 +22,7 @@
 <details>
 <summary><strong> 🚀 优化改进 </strong></summary>
 
+- 修复自动更新检查地址与签名配置，更新将由本仓库 Releases 提供
 
 **🖥️ Windows**
 
